@@ -28,6 +28,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "normalizr": "^3.6.2",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "reselect": "^4.1.8"
   }
 }
