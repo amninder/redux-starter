@@ -34,4 +34,13 @@ store.dispatch(bugAssignedToUser({ bugId: 1, userId: 3 }));
 console.log(getUnresolvedBugs(store.getState()));
 console.log(getBugsByUser(3)(store.getState()));
 
+store.dispatch((dispatch, getState) => {
+  dispatch({ type: "bugReceived", bugs: [1, 2, 3] });
+  console.log(getState());
+});
+
+store.dispatch((dispatch, getState) => {
+  dispatch({ type: "error", payload: { message: "An error occured" } });
+});
+
 unsubscribe();
