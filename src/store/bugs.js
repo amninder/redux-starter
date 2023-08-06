@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
+import { apiCallBegan } from "./api.js";
 
 let lastId = 0;
 
@@ -37,12 +38,26 @@ const slice = createSlice({
     },
   },
 });
-console.log(slice);
 
-export const { bugAdded, bugRemoved, bugResolved, bugAssignedToUser } =
-  slice.actions;
+export const {
+  bugAdded,
+  bugRemoved,
+  bugResolved,
+  bugAssignedToUser,
+  bugsReceived,
+} = slice.actions;
 export default slice.reducer;
 
+// Action Creators
+const url = "/bugs";
+export const loadBugs = () =>
+  apiCallBegan({
+    onSuccess: bugsReceived.type,
+    url,
+  });
+
+// Selector
+// Memoization
 export const getUnresolvedBugs = createSelector(
   (state) => state.entities.bugs,
   (bugs) => bugs.list.filter((bug) => !bug.resolved)
